@@ -5,7 +5,8 @@ from django.db.models.signals import pre_save
 KINDS = (
     ("stock", "Stock"),
     ("put", "Put"),
-    ("call", "Call")
+    ("call", "Call"),
+    ("div", "Dividends"),
 )
 
 STATUS = (
@@ -13,10 +14,16 @@ STATUS = (
     ("evaluate", "Evaluate"),
 )
 
+POCKETED = (
+    ("y", "Yes"),
+    ("n", "No"),
+)
+
 class Stock(models.Model):
     ticket = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     average_price = models.DecimalField(max_digits=5, decimal_places=2, default=0, editable=False)
+    pocketed = models.CharField(max_length=200, choices=POCKETED, default="yes")
     quantity = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,7 +45,7 @@ class StockItem(models.Model):
         return self.ticket
     
     def is_an_option_evaluable(self) -> bool:
-        return self.kind in ["call", "put"] and self.status == "evaluate"
+        return self.kind in ["call", "put", "div"] and self.status == "evaluate"
 
     def is_a_stock_evaluable(self) -> bool:
         return self.kind == "stock" and self.status == "evaluate"
