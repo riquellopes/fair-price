@@ -23,3 +23,6 @@ makemigrations:
 loaddata:
 	docker-compose stop
 	docker-compose run --rm options manage.py loaddata db.json
+
+clean:
+	find . -name "*.pyc" -exec rm -rf {} \;
