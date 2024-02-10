@@ -1,4 +1,5 @@
 .SILENT:
+DJANGO=.venv/bin/python manage.py
 
 up:
 	docker-compose stop
@@ -26,3 +27,6 @@ loaddata:
 
 clean:
 	find . -name "*.pyc" -exec rm -rf {} \;
+
+debug:
+	${DJANGO} runserver
