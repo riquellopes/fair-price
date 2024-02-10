@@ -4,4 +4,4 @@ Projeto de fim semana para me ajudar a controlar alguns custos com ações. Não
 
 # TODO
  - Auto completar código das opções que estão sendo cadastradas.
- - Cria testes.
+ - Criar testes.
