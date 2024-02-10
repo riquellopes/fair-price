@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
@@ -31,6 +32,16 @@ class Stock(models.Model):
     def __str__(self) -> str:
         return self.ticket
 
+def process_the_average_price(stock_id: int):
+    average_price = Stock.objects.raw(f"""
+        SELECT sos.price - (sum(total)/sos.quantity) as average_price, sos.id  FROM (
+            SELECT price*quantity as total, stock_id
+            FROM stock_options_stockitem s WHERE s.stock_id = {stock_id}) as total_earnings JOIN 
+        stock_options_stock sos ON total_earnings.stock_id = sos.id
+    """)[0].average_price
+    return average_price
+
+
 class StockItem(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     ticket = models.CharField(max_length=200)
@@ -38,6 +49,7 @@ class StockItem(models.Model):
     kind = models.CharField(max_length=200, choices=KINDS, default="stock")
     status = models.CharField(max_length=200, choices=STATUS, default="evaluate")
     quantity = models.IntegerField(default=0)
+    payment_date = models.DateField(default=datetime.date.today)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,13 +64,9 @@ class StockItem(models.Model):
     
 @receiver(pre_save, sender=StockItem)
 def calc_average_price(sender, instance, *args, **kwargs):
-    # total_price_item = instance.price * instance.quantity
-    # total_price_stock = instance.stock.average_price * instance.stock.quantity
-    # total_quantity = instance.quantity + instance.stock.quantity
-
-    stock_average_price = instance.stock.average_price if instance.stock.average_price > 0 else instance.stock.price
-
     if instance.is_an_option_evaluable():
-        instance.stock.average_price = stock_average_price - instance.price
+        average_price = process_the_average_price(instance.stock.id)
+        instance.stock.average_price = average_price if average_price > 0 else instance.stock.price
+
         instance.stock.save()
     instance.status = "done"
