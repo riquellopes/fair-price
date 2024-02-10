@@ -10,16 +10,16 @@ build:
 
 migrate:
 	docker-compose stop
-	docker-compose run --rm cards manage.py migrate
+	docker-compose run --rm options manage.py migrate
 
 createsuperuser:
 	docker-compose stop
-	docker-compose run --rm cards manage.py createsuperuser
+	docker-compose run --rm options manage.py createsuperuser
 
 makemigrations:
 	docker-compose stop
-	docker-compose run --rm cards manage.py makemigrations
+	docker-compose run --rm options manage.py makemigrations
 
 loaddata:
 	docker-compose stop
-	docker-compose run --rm cards manage.py loaddata db.json
+	docker-compose run --rm options manage.py loaddata db.json

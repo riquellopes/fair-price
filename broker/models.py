@@ -8,6 +8,10 @@ class Broker(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    # def get_all_options(self) -> tuple[Options]:
+    #     return None
+
+
 class Options(models.Model):
     broker = models.ForeignKey(Broker, on_delete=models.CASCADE)
     flat_tax = models.DecimalField(max_digits=5, decimal_places=2)
