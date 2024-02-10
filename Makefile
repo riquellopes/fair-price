@@ -30,3 +30,6 @@ clean:
 
 debug:
 	${DJANGO} runserver
+
+calc_average_price:
+	${DJANGO} calc_average_price
