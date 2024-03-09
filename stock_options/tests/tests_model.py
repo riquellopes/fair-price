@@ -9,13 +9,16 @@ def test_get_petra():
 
 @pytest.mark.django_db
 def test_create_an_item_and_get_average_price():
+    stock = StockFactory()
     item = StockItem(
-        stock = StockFactory(),
+        stock = stock,
         price = 2,
         quantity = 500,
         kind = "put"
     )
     item.save()
+    # item.refresh_from_db()
+    # stock.refresh_from_db()
 
     petr = Stock.objects.get(pk=item.stock.id)
     # put_petra = StockItemFactory()
