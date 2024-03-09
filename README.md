@@ -1,5 +1,5 @@
 # fair price
-Projeto de fim semana para me ajudar a controlar alguns custos com ações. Não use para nada serio. 
+Projeto de fim semana para me ajudar a controlar alguns custos com ações. Não use para nada sério. 
 
 
 # TODO
