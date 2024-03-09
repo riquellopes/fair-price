@@ -39,6 +39,9 @@ def process_the_average_price(stock_id: int):
             FROM stock_options_stockitem s WHERE s.stock_id = {stock_id}) as total_earnings JOIN 
         stock_options_stock sos ON total_earnings.stock_id = sos.id
     """)[0].average_price
+
+    print("BBBB", average_price)
+    
     return 0 if average_price is None else average_price
 
 
