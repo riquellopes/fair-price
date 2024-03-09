@@ -1,5 +1,6 @@
 .SILENT:
 DJANGO=.venv/bin/python manage.py
+PYTEST=.venv/bin/py.test
 
 up:
 	docker-compose stop
@@ -29,7 +30,10 @@ clean:
 	find . -name "*.pyc" -exec rm -rf {} \;
 
 debug:
-	${DJANGO} runserver
+	${DJANGO} runserver 0.0.0.0:8000 --settings=fair_price.settings.local
 
 calc_average_price:
 	${DJANGO} calc_average_price
+
+test:
+	${PYTEST} -s -r a --color=yes
