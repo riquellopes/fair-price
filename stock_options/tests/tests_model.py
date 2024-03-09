@@ -1,3 +1,7 @@
+import pytest
+from .factories import StockFactory
 
-def test_ss():
-    assert 1 == 1
+@pytest.mark.django_db
+def test_get_petra():
+    petra = StockFactory()
+    assert petra.ticket == "PETR4"
