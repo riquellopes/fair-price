@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from stock_options.views import StockViews
 
 admin.site.site_header = 'Fair price'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', StockViews.as_view())
 ]
