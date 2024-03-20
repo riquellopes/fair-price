@@ -33,7 +33,7 @@ debug:
 	${DJANGO} runserver 0.0.0.0:8000 --settings=fair_price.settings.local
 
 calc_average_price:
-	${DJANGO} calc_average_price
+	${DJANGO} calc_average_price --settings=fair_price.settings.local
 
 test:
 	${PYTEST} -s -r a --color=yes

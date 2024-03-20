@@ -19,34 +19,47 @@
             </h2>
             <div id="stock-{{stock.id}}" class="accordion-collapse collapse {% if forloop.first %}show{% endif%}" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>Price R$</strong> {{stock.price}}  
-                <strong>Average price</strong> R$ {{stock.average_price}}
-                <ul>
-                    <li><a href="https://statusinvest.com.br/acoes/{{stock.ticket}}" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Status invest</a></li>
-                    <li><a href="https://opcoes.net.br/opcoes/bovespa/{{stock.ticket}}" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Opções.net</a></li>
-                    <li><a href="https://br.financas.yahoo.com/quote/{{stock.ticket}}.SA/history" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">History data</a></li>
-                </ul>
-                <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container" style="height:100%;width:100%">
-                        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                            {
-                                "width": 980,
-                                "height": 610,
-                                "symbol": "BMFBOVESPA:{{stock.ticket}}",
-                                "interval": "D",
-                                "timezone": "Etc/UTC",
-                                "theme": "dark",
-                                "style": "1",
-                                "locale": "br",
-                                "enable_publishing": false,
-                                "allow_symbol_change": false,
-                                "calendar": false,
-                                "support_host": "https://www.tradingview.com"
-                            }
-                        </script>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <strong>Price R$</strong> {{stock.price}}  
+                            <strong>Average price</strong> R$ {{stock.average_price}}
+                        </div>
+                        <div class="col">
+                        <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                                    {
+                                        "width": 980,
+                                        "height": 610,
+                                        "symbol": "BMFBOVESPA:{{stock.ticket}}",
+                                        "interval": "D",
+                                        "timezone": "Etc/UTC",
+                                        "theme": "dark",
+                                        "style": "1",
+                                        "locale": "br",
+                                        "enable_publishing": false,
+                                        "allow_symbol_change": false,
+                                        "calendar": false,
+                                        "support_host": "https://www.tradingview.com"
+                                    }
+                                </script>
+                            </div>
+                        <!-- TradingView Widget END -->
+                        </div>
+                        <div class="col">
+                            <ul>
+                                <li><a href="https://statusinvest.com.br/acoes/{{stock.ticket}}" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Status invest</a></li>
+                                <li><a href="https://opcoes.net.br/opcoes/bovespa/{{stock.ticket}}" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Opções.net</a></li>
+                                <li><a href="https://br.financas.yahoo.com/quote/{{stock.ticket}}.SA/history" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">History data</a></li>
+                                <li><a href="https://statusinvest.com.br/opcoes/egie3/EGIEB452" target=”_blank” class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Option amount</a></li>
+                            </ul>
+                        </div>
                     </div>
-                <!-- TradingView Widget END -->
+                </div>
+                
+                
             </div>
             </div>
         </div>
